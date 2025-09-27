@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ServiceRepository {
@@ -23,7 +24,7 @@ public class ServiceRepository {
                """,mapper);
     }
 
-    public Services findById(String id) {
+    public Services findById(Integer id) {
         return (Services) jdbc.query("""
                 SELECT * FROM services WHERE id = ?
                 """, mapper, id);
@@ -41,19 +42,38 @@ public class ServiceRepository {
         }
     }
 
-    public Services update(Integer id, ServicesDTO service) throws SQLException {
+    public Optional<Services> update(Integer id, ServicesDTO service) throws SQLException {
         try{
-            jdbc.update("""
+            int rows = jdbc.update("""
                     UPDATE services SET service = ?, description = ?, category = ?
                     WHERE id = ?
-                    """,mapper,service.service(), service.description(), service.category(),id);
-            return new Services(service.service(), service.description(), service.category());
+                    """,service.service(), service.description(), service.category(),id);
+            if (rows == 0) return Optional.empty();
+
+            return jdbc.query("""
+            SELECT id, service, description, category
+            FROM services
+            WHERE id = ?
+        """, mapper, id).stream().findFirst();
 
         }catch (Exception e){
             System.out.println(e.getMessage());
-            return new Services();
+            throw new SQLException();
         }
     }
+
+    public Optional<Services> delete(Integer id) throws SQLException {
+        var list = jdbc.query("""
+                SELECT * FROM services WHERE id = ?
+                """, mapper, id);
+
+        if (list.isEmpty()) return Optional.empty();
+        jdbc.update("DELETE FROM services WHERE id = ?", id);
+
+        return  list.stream().findFirst();
+    }
+
+
 
 
 }

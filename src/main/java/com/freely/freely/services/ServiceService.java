@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ServiceService {
@@ -22,7 +23,11 @@ public class ServiceService {
         return repository.create(servicesDTO);
     }
 
-    public Services update(Integer id,ServicesDTO servicesDTO) throws SQLException {
+    public Optional<Services> update(Integer id, ServicesDTO servicesDTO) throws SQLException {
         return repository.update(id,servicesDTO);
+    }
+
+    public Optional<Services> delete(Integer id) throws SQLException {
+        return repository.delete(id);
     }
 }
