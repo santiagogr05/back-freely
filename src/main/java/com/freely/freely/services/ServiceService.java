@@ -21,4 +21,8 @@ public class ServiceService {
     public Services create(ServicesDTO servicesDTO) throws SQLException {
         return repository.create(servicesDTO);
     }
+
+    public Services update(Integer id,ServicesDTO servicesDTO) throws SQLException {
+        return repository.update(id,servicesDTO);
+    }
 }
