@@ -37,8 +37,4 @@ public class ServicesController {
         return serviceService.create(servicesDTO);
     }
 
-    @PutMapping("/{id}")
-    public Services update(@PathVariable Integer id, @RequestBody ServicesDTO servicesDTO) throws SQLException {
-        return serviceService.update(id, servicesDTO);
-    }
 }
