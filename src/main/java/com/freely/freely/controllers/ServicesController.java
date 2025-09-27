@@ -24,7 +24,7 @@ public class ServicesController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public Services create(
+    public ResponseEntity<Services> create(
             @RequestBody ServicesDTO servicesDTO
             ) throws SQLException {
         return service.create(servicesDTO);
