@@ -44,5 +44,19 @@ public class ServiceRepository {
         }
     }
 
+    public Services update(Integer id, ServicesDTO service) throws SQLException {
+        try{
+            jdbc.update("""
+                    UPDATE services SET service = ?, description = ?, category = ?
+                    WHERE id = ?
+                    """,mapper,service.service(), service.description(), service.category(),id);
+            return new Services(service.service(), service.description(), service.category());
+
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return new Services();
+        }
+    }
+
 
 }
