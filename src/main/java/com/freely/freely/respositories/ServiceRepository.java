@@ -2,6 +2,8 @@ package com.freely.freely.respositories;
 
 import com.freely.freely.DTO.ServicesDTO;
 import com.freely.freely.entities.Services;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -29,15 +31,16 @@ public class ServiceRepository {
                 """, mapper, id);
     }
 
-    public Services create(ServicesDTO service) throws SQLException {
+    public ResponseEntity<Services> create(ServicesDTO service) throws SQLException {
         try{
-            jdbc.query("""
+            jdbc.update("""
                     INSERT INTO services (service, description, category) VALUES (?, ?, ?)
-                    """, mapper, service.service(), service.description(), service.category());
-            return new Services(service.service(), service.description(), service.category());
+                    """, service.service(), service.description(), service.category());
+            Services response = new Services(service.service(), service.description(), service.category());
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
         } catch (Exception e){
             System.out.println(e.getMessage());
-            return new Services();
+            return new ResponseEntity<>(new Services(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

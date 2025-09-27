@@ -4,6 +4,7 @@ import com.freely.freely.DTO.ServicesDTO;
 import com.freely.freely.entities.Services;
 import com.freely.freely.respositories.ServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ public class ServiceService {
         return repository.findAll();
     }
 
-    public Services create(ServicesDTO servicesDTO) throws SQLException {
+    public ResponseEntity<Services> create(ServicesDTO servicesDTO) throws SQLException {
         return repository.create(servicesDTO);
     }
 }

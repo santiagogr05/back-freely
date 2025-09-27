@@ -4,6 +4,7 @@ import com.freely.freely.DTO.ServicesDTO;
 import com.freely.freely.entities.Services;
 import com.freely.freely.services.ServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
@@ -21,7 +22,7 @@ public class ServicesController {
     }
 
     @PostMapping("/create")
-    public Services create(
+    public ResponseEntity<Services> create(
             @RequestBody ServicesDTO servicesDTO
             ) throws SQLException {
         return serviceService.create(servicesDTO);
