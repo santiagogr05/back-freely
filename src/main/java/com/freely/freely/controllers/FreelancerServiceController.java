@@ -1,8 +1,8 @@
 package com.freely.freely.controllers;
 
 import com.freely.freely.DTO.ServicesDTO;
-import com.freely.freely.entities.Services;
-import com.freely.freely.services.ServiceService;
+import com.freely.freely.entities.FreelancerService;
+import com.freely.freely.services.FreelancerServiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,33 +10,50 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
-@RestController
+@RestController()
 @RequestMapping("/services")
-public class ServicesController {
+public class FreelancerServiceController {
     @Autowired
-    private ServiceService service;
+    private FreelancerServiceService service;
 
-    @GetMapping("/")
-    public List<Services> findAll(){
+    @GetMapping("")
+    public List<FreelancerService> list() {
         return service.findAll();
     }
 
-    @PostMapping("/create")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Services> create(
-            @RequestBody ServicesDTO servicesDTO
-            ) throws SQLException {
-        return service.create(servicesDTO);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> view(@PathVariable Integer id) {
+        Optional<FreelancerService> freelancerServiceOptional = service.findById(id);
+        // Verifies if the freelancer service is in the database
+        if (freelancerServiceOptional.isPresent()) {
+            return ResponseEntity.ok(freelancerServiceOptional.orElseThrow());
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("")
+    public ResponseEntity<FreelancerService> create(@RequestBody FreelancerService freelancerService) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(freelancerService));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Services> update(@PathVariable Integer id, @RequestBody ServicesDTO body) throws SQLException {
-        return service.update(id, body).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<FreelancerService> update(@PathVariable Integer id, @RequestBody FreelancerService freelancerService) {
+        freelancerService.setId(id);
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(freelancerService));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Services> delete(@PathVariable Integer id) throws SQLException {
-        return service.delete(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
+        FreelancerService freelancerService = new  FreelancerService();
+        freelancerService.setId(id);
+        Optional<FreelancerService> freelancerServiceOptional = service.delete(freelancerService);
+        if (freelancerServiceOptional.isPresent()) {
+            return ResponseEntity.ok(freelancerServiceOptional.orElseThrow());
+        }
+        return ResponseEntity.notFound().build();
     }
+
 }

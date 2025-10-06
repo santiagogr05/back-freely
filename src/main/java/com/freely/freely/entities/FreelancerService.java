@@ -1,8 +1,6 @@
 package com.freely.freely.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +12,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @Entity
 @Table(name="services")
-public class Services {
+public class FreelancerService {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String service;
     private String description;
