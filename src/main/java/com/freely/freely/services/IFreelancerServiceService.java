@@ -9,5 +9,6 @@ public interface IFreelancerServiceService {
     List<FreelancerService> findAll();
     Optional<FreelancerService> findById(Integer id);
     FreelancerService save(FreelancerService services);
-    Optional<FreelancerService> delete(FreelancerService services);
+    Optional<FreelancerService> update(Integer id, FreelancerService services);
+    Optional<FreelancerService> delete(Integer id);
 }

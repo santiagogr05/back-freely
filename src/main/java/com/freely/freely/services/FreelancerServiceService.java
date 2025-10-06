@@ -35,8 +35,23 @@ public class FreelancerServiceService implements IFreelancerServiceService {
 
     @Transactional
     @Override
-    public Optional<FreelancerService> delete(FreelancerService service) {
-        Optional<FreelancerService> serviceOptional = repository.findById(service.getId());
+    public Optional<FreelancerService> update(Integer id, FreelancerService freelancerService) {
+        Optional<FreelancerService> serviceOptional = repository.findById(id);
+        if (serviceOptional.isPresent() ) {
+            FreelancerService serviceDb = serviceOptional.orElseThrow();
+            serviceDb.setService(freelancerService.getService());
+            serviceDb.setDescription(freelancerService.getDescription());
+            serviceDb.setCategory(freelancerService.getCategory());
+            return Optional.of(repository.save(serviceDb));
+
+        };
+        return serviceOptional;
+    }
+
+    @Transactional
+    @Override
+    public Optional<FreelancerService> delete(Integer id) {
+        Optional<FreelancerService> serviceOptional = repository.findById(id);
         serviceOptional.ifPresent(serviceDb -> repository.delete(serviceDb));
         return serviceOptional;
     }

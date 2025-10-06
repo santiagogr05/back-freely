@@ -41,15 +41,17 @@ public class FreelancerServiceController {
 
     @PutMapping("/{id}")
     public ResponseEntity<FreelancerService> update(@PathVariable Integer id, @RequestBody FreelancerService freelancerService) {
-        freelancerService.setId(id);
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(freelancerService));
+        Optional<FreelancerService> freelancerServiceOptional = service.update(id, freelancerService);
+        if (freelancerServiceOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(freelancerServiceOptional.orElseThrow());
+        }
+        return  ResponseEntity.notFound().build();
+
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
-        FreelancerService freelancerService = new  FreelancerService();
-        freelancerService.setId(id);
-        Optional<FreelancerService> freelancerServiceOptional = service.delete(freelancerService);
+        Optional<FreelancerService> freelancerServiceOptional = service.delete(id);
         if (freelancerServiceOptional.isPresent()) {
             return ResponseEntity.ok(freelancerServiceOptional.orElseThrow());
         }
