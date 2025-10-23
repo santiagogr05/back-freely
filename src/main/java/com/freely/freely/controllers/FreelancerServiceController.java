@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(value = "http://localhost:3000")
 @RestController()
 @RequestMapping("/services")
 public class FreelancerServiceController {
