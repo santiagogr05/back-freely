@@ -1,15 +1,15 @@
 package com.freely.freely.respositories;
 
-import com.freely.freely.entities.Services;
+import com.freely.freely.entities.FreelancerService;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ServiceRowMapper implements RowMapper<Services> {
+public class ServiceRowMapper implements RowMapper<FreelancerService> {
     @Override
-    public Services mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return Services.builder().
+    public FreelancerService mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return FreelancerService.builder().
                 id(rs.getObject("id",Integer.class))
                 .service(rs.getString("service"))
                 .description(rs.getString("description"))

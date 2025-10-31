@@ -1,5 +1,6 @@
 package com.freely.freely.entities;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,15 +10,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Services {
+@Entity
+@Table(name="services")
+public class FreelancerService {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String service;
     private String description;
     private String category;
-
-    public Services(String service, String description, String category) {
-        this.service = service;
-        this.description = description;
-        this.category = category;
-    }
 }
