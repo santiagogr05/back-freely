@@ -1,4 +1,4 @@
-package com.freely.freely.respositories;
+package com.freely.freely.repositories;
 
 import com.freely.freely.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;

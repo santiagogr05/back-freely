@@ -1,7 +1,7 @@
 package com.freely.freely.services;
 
 import com.freely.freely.entities.FreelancerService;
-import com.freely.freely.respositories.FreelancerServiceRepository;
+import com.freely.freely.repositories.FreelancerServiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
