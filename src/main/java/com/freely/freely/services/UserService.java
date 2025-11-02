@@ -4,7 +4,7 @@ import com.freely.freely.DTO.user.CreateUserDTO;
 import com.freely.freely.DTO.user.ResponseUserDTO;
 import com.freely.freely.entities.User;
 import com.freely.freely.mappers.UserMapper;
-import com.freely.freely.repositories.UserRepository;
+import com.freely.freely.repositories.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class UserService implements IUserService {
     @Autowired
-    private UserRepository repository;
+    private IUserRepository repository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -44,6 +44,6 @@ public class UserService implements IUserService {
     @Override
     @Transactional(readOnly = true)
     public Optional<User> findByEmail(String email) {
-        return repository.findUserByEmail(email);
+        return repository.findByEmail(email);
     }
 }
