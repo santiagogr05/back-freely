@@ -3,6 +3,7 @@ package com.freely.freely.controllers;
 import com.freely.freely.DTO.auth.LoginDTO;
 import com.freely.freely.DTO.auth.RegisterDTO;
 import com.freely.freely.DTO.auth.ResponseDTO;
+import com.freely.freely.controllers.api.AuthApi;
 import com.freely.freely.services.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,16 +13,18 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthController implements AuthApi {
     @Autowired
     private AuthService service;
 
     @PostMapping(value = "/login")
+    @Override
     public ResponseEntity<ResponseDTO> login(@Valid @RequestBody LoginDTO loginDTO) {
         return ResponseEntity.ok(service.login(loginDTO));
     }
 
     @PostMapping(value = "/register")
+    @Override
     public ResponseEntity<ResponseDTO> register(@Valid @RequestBody RegisterDTO registerDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.register(registerDTO));
     }
