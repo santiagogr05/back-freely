@@ -17,5 +17,14 @@ jwt:
   secret: ${JWT_SECRET}
   expiration: 3600000  #1 hour in milliseconds
 
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+    operations-sorter: method
+    tags-sorter: alpha
+
 
 
