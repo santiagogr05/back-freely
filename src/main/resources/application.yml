@@ -1,14 +1,18 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/Freely
-    username: ${DB_USERNAME}
+    url: ${DB_URL}
     password: ${DB_PASSWORD}
+    username: ${DB_USERNAME}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
 server:
   servlet:
     context-path: /api
