@@ -1,12 +1,17 @@
 package com.freely.freely.entities;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Table
 @Entity(name = "languages")
+@Getter
+@Setter
 public class Language {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
