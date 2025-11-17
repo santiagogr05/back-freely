@@ -60,7 +60,8 @@ public class SpringSecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",
                                 "/webjars/**",
-                                "/services/**"
+                                "/services/**",
+                                "/freelancers/cards"
                         ).permitAll()
                                 .anyRequest().authenticated()
                 )
