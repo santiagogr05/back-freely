@@ -30,4 +30,10 @@ public class FreelancerService implements IFreelancerService{
         List<Freelancer> freelancers = repository.findAll(pageable).getContent();
         return mapper.toCardDTOs(freelancers);
     }
+
+    @Override
+    public List<FreelancerCardDTO> getAllFreelancers() {
+        List<Freelancer> freelancers = repository.findAll();
+        return mapper.toCardDTOs(freelancers);
+    }
 }

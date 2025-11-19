@@ -22,4 +22,9 @@ public class FreelancerController {
         return ResponseEntity.ok(service.getTopFreelancers());
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<FreelancerCardDTO>> getAllFreelancers() {
+        return ResponseEntity.ok(service.getAllFreelancers());
+    }
+
 }

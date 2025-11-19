@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface IFreelancerService {
     List<FreelancerCardDTO> getTopFreelancers();
+
+    List<FreelancerCardDTO> getAllFreelancers();
 }
