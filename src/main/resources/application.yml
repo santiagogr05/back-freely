@@ -30,5 +30,9 @@ springdoc:
     operations-sorter: method
     tags-sorter: alpha
 
+resend:
+  api-key: ${RESEND_API_KEY}
+  from-email: "onboarding@resend.dev"
+
 
 

@@ -52,7 +52,9 @@ public class SpringSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         return http.csrf(
                         csrf -> csrf.disable()
-                ).authorizeHttpRequests(
+                )
+                .cors(cors -> cors.disable())
+                .authorizeHttpRequests(
                         auth -> auth.requestMatchers(
                                 "/auth/**",
                                 "/swagger-ui/**",
@@ -60,7 +62,9 @@ public class SpringSecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",
                                 "/webjars/**",
-                                "/services/**"
+                                "/services/**",
+                                "/test/**",
+                                "/api/test/**"
                         ).permitAll()
                                 .anyRequest().authenticated()
                 )

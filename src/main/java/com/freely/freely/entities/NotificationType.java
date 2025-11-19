@@ -1,6 +1,7 @@
 package com.freely.freely.entities;
 
 public enum NotificationType {
-    EMAIL,
-    SYSTEM
+    NEW_MESSAGE,
+    DELIVERABLE_SENT,
+    DELIVERABLE_APPROVED
 }
