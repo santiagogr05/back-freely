@@ -69,7 +69,8 @@ public class SpringSecurityConfig {
                                 "/webjars/**",
                                 "/services/**",
                                 "/freelancers/cards",
-                                "/freelancers/all"
+                                "/freelancers/all",
+                                "/freelancers/{id}"
                         ).permitAll()
                                 .anyRequest().authenticated()
                 )

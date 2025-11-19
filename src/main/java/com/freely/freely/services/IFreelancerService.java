@@ -8,4 +8,6 @@ public interface IFreelancerService {
     List<FreelancerCardDTO> getTopFreelancers();
 
     List<FreelancerCardDTO> getAllFreelancers();
+
+    FreelancerCardDTO getFreelancerById(Integer id);
 }
